@@ -596,6 +596,7 @@ window.addEventListener("click", raycasterInteraction);
 window.addEventListener("touchstart",
   (e) => {
     if (modalOpen) return;
+    if (e.target !== canvas) return;
     e.preventDefault();
     pointer.x = (e.touches[0].clientX / sizes.width) * 2 - 1;
     pointer.y = -(e.touches[0].clientY / sizes.height) * 2 + 1;
@@ -606,6 +607,7 @@ window.addEventListener("touchstart",
 window.addEventListener("touchend",
   (e) => {
     if (modalOpen) return;
+    if (e.target !== canvas) return;
     e.preventDefault();
     raycasterInteraction();
   }, { passive: false }
