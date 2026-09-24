@@ -48,6 +48,7 @@ let touchOccurred = false;
 document.querySelectorAll(".modal-exit-button").forEach((button) => {
   button.addEventListener("touchend", (e) => {
     touchOccurred = true;
+    e.preventDefault();
     const modal = e.target.closest(".modal");
     hideModal(modal);
   }, {passive: false});
@@ -591,7 +592,12 @@ window.addEventListener("mousemove", (e) => {
 });
 
 // Clicks
-window.addEventListener("click", raycasterInteraction);
+window.addEventListener("click",
+  (e) => {
+    if (modalOpen) return;
+    if (e.target !== canvas) return;
+    raycasterInteraction();
+  });
 
 window.addEventListener("touchstart",
   (e) => {
